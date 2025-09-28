@@ -18,34 +18,66 @@ export const CustomLineChart = ({
   data,
   width = 600,
   height = 300,
-  color = '#8884d8',
-  strokeWidth = 2
+  color = '#6366f1',
+  strokeWidth = 3
 }: LineChartProps) => {
   return (
-    <ResponsiveContainer width={width} height={height}>
-      <LineChart data={data}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Line
-          type="monotone"
-          dataKey="value"
-          stroke={color}
-          strokeWidth={strokeWidth}
-          name="Sales"
-        />
-        {data.some(d => d.value2 !== undefined) && (
+    <div style={{
+      backgroundColor: '#1f2937',
+      padding: '20px',
+      borderRadius: '12px',
+      boxShadow: '0 10px 25px rgba(0,0,0,0.3)'
+    }}>
+      <ResponsiveContainer width={width} height={height}>
+        <LineChart data={data}>
+          <CartesianGrid strokeDasharray="2 2" stroke="#374151" opacity={0.7} />
+          <XAxis
+            dataKey="name"
+            stroke="#e5e7eb"
+            fontSize={12}
+            tickLine={false}
+            axisLine={false}
+          />
+          <YAxis
+            stroke="#e5e7eb"
+            fontSize={12}
+            tickLine={false}
+            axisLine={false}
+          />
+          <Tooltip
+            contentStyle={{
+              backgroundColor: '#374151',
+              border: 'none',
+              borderRadius: '8px',
+              color: '#f3f4f6',
+              boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+            }}
+          />
+          <Legend
+            wrapperStyle={{ color: '#e5e7eb' }}
+          />
           <Line
             type="monotone"
-            dataKey="value2"
-            stroke="#82ca9d"
+            dataKey="value"
+            stroke={color}
             strokeWidth={strokeWidth}
-            name="Revenue"
+            name="Sales"
+            dot={{ fill: color, strokeWidth: 2, r: 5 }}
+            activeDot={{ r: 7, stroke: color, strokeWidth: 2, fill: '#fff' }}
           />
-        )}
-      </LineChart>
-    </ResponsiveContainer>
+          {data.some(d => d.value2 !== undefined) && (
+            <Line
+              type="monotone"
+              dataKey="value2"
+              stroke="#10b981"
+              strokeWidth={strokeWidth}
+              name="Revenue"
+              dot={{ fill: '#10b981', strokeWidth: 2, r: 5 }}
+              activeDot={{ r: 7, stroke: '#10b981', strokeWidth: 2, fill: '#fff' }}
+            />
+          )}
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
   );
 };
