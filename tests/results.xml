@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Test Report" tests="27" failures="5" skipped="2" errors="0" time="45.234">
+  
+  <!-- Test Suite 1: 10 tests (2 failed, 1 skipped, 7 passed) -->
+  <testsuite name="com.example.authentication.AuthenticationTestSuite" 
+             tests="10" 
+             failures="2" 
+             skipped="1" 
+             errors="0" 
+             time="15.432" 
+             timestamp="2025-10-03T10:30:00">
+    
+    <!-- Passed Tests -->
+    <testcase classname="com.example.authentication.LoginTest" name="testValidUserLogin" time="0.523"/>
+    <testcase classname="com.example.authentication.LoginTest" name="testLoginWithRememberMe" time="0.234"/>
+    <testcase classname="com.example.authentication.LoginTest" name="testLogout" time="0.156"/>
+    <testcase classname="com.example.authentication.PasswordTest" name="testPasswordEncryption" time="0.089"/>
+    <testcase classname="com.example.authentication.PasswordTest" name="testPasswordValidation" time="0.045"/>
+    <testcase classname="com.example.authentication.SessionTest" name="testSessionCreation" time="0.234"/>
+    <testcase classname="com.example.authentication.SessionTest" name="testSessionExpiry" time="1.234"/>
+    
+    <!-- Failed Tests -->
+    <testcase classname="com.example.authentication.LoginTest" name="testInvalidCredentials" time="0.456">
+      <failure message="Expected status 401 but got 500" type="AssertionError">
+        java.lang.AssertionError: Expected status 401 but got 500
+        at org.junit.Assert.assertEquals(Assert.java:115)
+        at com.example.authentication.LoginTest.testInvalidCredentials(LoginTest.java:45)
+        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+      </failure>
+    </testcase>
+    
+    <testcase classname="com.example.authentication.PasswordTest" name="testPasswordReset" time="2.345">
+      <failure message="Email service timeout" type="java.net.SocketTimeoutException">
+        java.net.SocketTimeoutException: Read timed out
+        at java.net.SocketInputStream.socketRead0(Native Method)
+        at com.example.authentication.PasswordTest.testPasswordReset(PasswordTest.java:89)
+      </failure>
+    </testcase>
+    
+    <!-- Skipped Test -->
+    <testcase classname="com.example.authentication.OAuth2Test" name="testGoogleOAuthIntegration" time="0">
+      <skipped message="OAuth2 credentials not configured in test environment"/>
+    </testcase>
+    
+    <system-out><![CDATA[Authentication test suite execution started
+Database connection established
+Test data initialized]]></system-out>
+    <system-err><![CDATA[WARNING: Using test database
+WARNING: Email service in mock mode]]></system-err>
+  </testsuite>
+  
+  <!-- Test Suite 2: 8 tests (2 failed, 0 skipped, 6 passed) -->
+  <testsuite name="com.example.api.APIEndpointTestSuite" 
+             tests="8" 
+             failures="2" 
+             skipped="0" 
+             errors="0" 
+             time="12.567" 
+             timestamp="2025-10-03T10:30:15">
+    
+    <!-- Passed Tests -->
+    <testcase classname="com.example.api.UserAPITest" name="testGetUserById" time="0.234"/>
+    <testcase classname="com.example.api.UserAPITest" name="testCreateUser" time="0.456"/>
+    <testcase classname="com.example.api.UserAPITest" name="testUpdateUser" time="0.389"/>
+    <testcase classname="com.example.api.UserAPITest" name="testListUsers" time="0.567"/>
+    <testcase classname="com.example.api.ProductAPITest" name="testGetProduct" time="0.123"/>
+    <testcase classname="com.example.api.ProductAPITest" name="testSearchProducts" time="0.789"/>
+    
+    <!-- Failed Tests -->
+    <testcase classname="com.example.api.UserAPITest" name="testDeleteUser" time="0.345">
+      <failure message="Foreign key constraint violation" type="java.sql.SQLException">
+        java.sql.SQLException: Cannot delete or update a parent row: a foreign key constraint fails
+        at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1074)
+        at com.example.api.UserAPITest.testDeleteUser(UserAPITest.java:123)
+      </failure>
+    </testcase>
+    
+    <testcase classname="com.example.api.ProductAPITest" name="testBulkImport" time="5.234">
+      <failure message="Out of memory error during bulk import" type="java.lang.OutOfMemoryError">
+        java.lang.OutOfMemoryError: Java heap space
+        at java.util.Arrays.copyOf(Arrays.java:3210)
+        at com.example.api.ProductAPITest.testBulkImport(ProductAPITest.java:234)
+      </failure>
+    </testcase>
+    
+    <system-out><![CDATA[API endpoint tests starting
+Mock server initialized on port 8080]]></system-out>
+  </testsuite>
+  
+  <!-- Test Suite 3: 9 tests (1 failed, 1 skipped, 7 passed) -->
+  <testsuite name="com.example.integration.IntegrationTestSuite" 
+             tests="9" 
+             failures="1" 
+             skipped="1" 
+             errors="0" 
+             time="17.235" 
+             timestamp="2025-10-03T10:30:28">
+    
+    <!-- Passed Tests -->
+    <testcase classname="com.example.integration.DatabaseTest" name="testConnection" time="0.045"/>
+    <testcase classname="com.example.integration.DatabaseTest" name="testTransactionRollback" time="0.234"/>
+    <testcase classname="com.example.integration.DatabaseTest" name="testConcurrentAccess" time="1.567"/>
+    <testcase classname="com.example.integration.CacheTest" name="testCacheHit" time="0.023"/>
+    <testcase classname="com.example.integration.CacheTest" name="testCacheExpiration" time="2.134"/>
+    <testcase classname="com.example.integration.MessageQueueTest" name="testMessagePublish" time="0.456"/>
+    <testcase classname="com.example.integration.MessageQueueTest" name="testMessageConsume" time="0.678"/>
+    
+    <!-- Failed Test -->
+    <testcase classname="com.example.integration.ExternalServiceTest" name="testPaymentGateway" time="3.456">
+      <failure message="Payment gateway returned unexpected response code" type="junit.framework.AssertionFailedError">
+        junit.framework.AssertionFailedError: Expected response code 200 but was 503
+        at junit.framework.Assert.fail(Assert.java:47)
+        at com.example.integration.ExternalServiceTest.testPaymentGateway(ExternalServiceTest.java:78)
+      </failure>
+    </testcase>
+    
+    <!-- Skipped Test -->
+    <testcase classname="com.example.integration.ExternalServiceTest" name="testSMSProvider" time="0">
+      <skipped message="SMS provider API key not available in test environment"/>
+    </testcase>
+    
+    <system-out><![CDATA[Integration tests initialized
+External services mocked where necessary]]></system-out>
+    <system-err><![CDATA[WARNING: Using sandbox payment gateway]]></system-err>
+  </testsuite>
+  
+</testsuites>
